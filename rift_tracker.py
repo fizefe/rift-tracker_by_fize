@@ -229,10 +229,8 @@ def format_time(seconds: float) -> str:
 
 
 def build_join_link(server_id: str) -> str:
-    return (
-        f"https://www.roblox.com/games/start"
-        f"?placeId={PLACE_ID}&gameInstanceId={server_id}"
-    )
+    # Прямая ссылка на конкретный сервер по jobId
+    return f"https://www.roblox.com/games/{PLACE_ID}?jobId={server_id}"
 
 
 # ──────────────────────────────────────────────────────────────
@@ -283,7 +281,6 @@ async def notify_rift_server(
         f"🌀 <b>РИФТ АКТИВЕН!</b> (#{status['rift_number']})\n\n"
         f"⏳ <b>Сервер существует:</b> {format_time(age_sec)} "
         f"({age_sec / 3600:.2f}ч)\n"
-        f"⏱ <b>Рифт закроется через:</b> {left}\n"
         f"👥 <b>Игроков:</b> {player_count}/{server.get('maxPlayers', '?')}\n\n"
         f"🎮 <b>Войти на сервер:</b>\n"
         f'<a href="{join}">▶ Нажми здесь</a>\n\n'
