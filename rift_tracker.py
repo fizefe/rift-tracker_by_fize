@@ -277,18 +277,20 @@ async def notify_rift_server(
     else:
         player_count = 0
 
-    deep_link = f"roblox://experiences/start?placeId={PLACE_ID}&gameInstanceId={srv_id}"
-    web_link = f"https://www.roblox.com/games/{PLACE_ID}?jobId={srv_id}"
+    deep_link  = f"roblox://experiences/start?placeId={PLACE_ID}&gameInstanceId={srv_id}"
+    ropro_link = f"https://www.roblox.com/games/{PLACE_ID}?jobId={srv_id}"
 
     text = (
         f"🌀 <b>РИФТ АКТИВЕН!</b> (#{status['rift_number']})\n\n"
-        f"⏳ <b>Сервер существует:</b> {format_time(age_sec)} "
-        f"({age_sec / 3600:.2f}ч)\n"
-        f"👥 <b>Игроков:</b> {player_count}/{server.get('maxPlayers', '?')}\n\n"
-        f"🎮 <b>Войти на сервер:</b>\n"
-        f'<a href="{deep_link}">▶ Открыть в Roblox (ПК/телефон)</a>\n\n'
-        f"📋 <b>Или скопируй ссылку:</b>\n"
-        f"<code>{web_link}</code>"
+        f"⏳ <b>Сервер существует:</b> {format_time(age_sec)} ({age_sec / 3600:.2f}ч)\n"
+        f"👥 <b>Игроков:</b> {player_count}/{server.get('maxPlayers', '?')}\n"
+        f"🆔 <b>Job ID:</b> <code>{srv_id}</code>\n\n"
+        f"🎮 <b>Способы входа:</b>\n"
+        f'1. <a href="{deep_link}">▶ Открыть в Roblox</a> — нажми если Roblox установлен\n'
+        f'2. <a href="{ropro_link}">🌐 Открыть страницу сервера</a> — нажми затем Join (нужен RoPro)\n\n'
+        f"📋 <b>Job ID для ручного входа:</b>\n"
+        f"<code>{srv_id}</code>\n"
+        f"<i>(RoPro: Server List → вставь Job ID → Join)</i>"
     )
 
     ok = await send_telegram(session, text)
